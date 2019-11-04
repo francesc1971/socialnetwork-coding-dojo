@@ -37,11 +37,6 @@
 			<artifactId>h2</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -65,6 +60,29 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<!-- see https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin -->
+			<!-- mvn compile jib:dockerBuild -->
+			<!-- mvn compile jib:buildTar (then  docker load (-)(-)input target/jib-image.tar)-->
+			<plugin>
+		        <groupId>com.google.cloud.tools</groupId>
+		        <artifactId>jib-maven-plugin</artifactId>
+		        <version>1.2.0</version>
+		        <configuration>
+		          <container>
+		          	<jvmFlags>
+		          		<jvmFlag>-noverify</jvmFlag>
+		          		<jvmFlag>-Xms128M</jvmFlag>
+		          		<jvmFlag>-Xmx512m</jvmFlag>
+		          	</jvmFlags>
+		          	<ports>
+		          		<port>8081</port>
+		          	</ports>
+		          </container>
+		          <to>
+		          	<image>social-network-server:${project.version}</image>
+		          </to>
+		        </configuration>
+		      </plugin>
 		</plugins>
 	</build>
 
