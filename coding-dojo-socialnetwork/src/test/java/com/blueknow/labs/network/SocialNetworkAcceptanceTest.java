@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.blueknow.labs.network.port.out.MessageRepository;
 import com.blueknow.labs.network.port.in.PublishMessageUseCase;
 import com.blueknow.labs.network.model.Message;
+import com.blueknow.labs.network.model.Message.Channel;
 import com.blueknow.labs.network.service.PublishMessageService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -150,5 +151,10 @@ class MapMessageRepository implements MessageRepository {
     public List<Message> findMessagesByUser(final String user) {
         return Optional.ofNullable (this.messages.get (user)).orElseGet (ArrayList::new);
     }
+
+	@Override
+	public List<Message> findMessagesByUserAndChannel(final String user, final Channel channel) {
+		return this.findMessagesByUser(user);
+	}
 
 }

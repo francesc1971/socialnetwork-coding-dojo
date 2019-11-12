@@ -19,4 +19,11 @@ public interface MessageRepository {
 
     List<Message> findMessagesByUser(final String user);
     
+    /**
+     * @param user
+     * @param channel
+     * @return
+     */
+    List<Message> findMessagesByUserAndChannel(final String user, final Message.Channel channel);
+    
 }
