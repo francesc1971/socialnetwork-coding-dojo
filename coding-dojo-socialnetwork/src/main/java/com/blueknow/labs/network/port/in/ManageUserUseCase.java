@@ -9,12 +9,10 @@
  */
 package com.blueknow.labs.network.port.in;
 
-public interface UserUseCase {
+import com.blueknow.labs.network.model.User;
 
-	/**
-	 * @param name
-	 * @return
-	 */
-	boolean existsUser(final String name);
+public interface ManageUserUseCase {
+
+	long save(final User user);
 	
 }

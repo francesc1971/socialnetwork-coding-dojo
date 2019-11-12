@@ -39,7 +39,7 @@ public class SocialNetworkAcceptanceTest {
                 .returnResult(String.class).getResponseBody().single();
         response.subscribe (str -> assertEquals ("OK", str));
         //
-        final Flux<String> results = this.client.get ().uri ("/api/messages/alice").exchange ()
+        final Flux<String> results = this.client.get ().uri ("/api/publish/alice").exchange ()
                 .expectStatus ().isOk ()
                 .returnResult (String.class).getResponseBody();
         results.subscribe (values -> {

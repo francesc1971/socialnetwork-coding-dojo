@@ -3,14 +3,14 @@ package com.blueknow.labs.network;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.blueknow.labs.network.port.in.PublishMessageUseCase;
-import com.blueknow.labs.network.service.PublishMessageService;
+import com.blueknow.labs.network.service.MessageService;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class Stepdefs {
 
-    private PublishMessageUseCase publishMessageUseCase = new PublishMessageService (new MapMessageRepository ());
+    private PublishMessageUseCase publishMessageUseCase = new MessageService (new MapMessageRepository ());
 
     private String user;
 

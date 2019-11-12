@@ -6,7 +6,7 @@ import com.blueknow.labs.network.port.out.MessageRepository;
 import com.blueknow.labs.network.port.in.PublishMessageUseCase;
 import com.blueknow.labs.network.model.Message;
 import com.blueknow.labs.network.model.Message.Channel;
-import com.blueknow.labs.network.service.PublishMessageService;
+import com.blueknow.labs.network.service.MessageService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sun.net.httpserver.HttpServer;
@@ -33,7 +33,7 @@ public class SocialNetworkAcceptanceTest {
 
     private static final Logger logger = LoggerFactory.getLogger (SocialNetworkAcceptanceTest.class);
 
-    private final PublishMessageUseCase publishMessageUseCase = new PublishMessageService (new MapMessageRepository ());
+    private final PublishMessageUseCase publishMessageUseCase = new MessageService (new MapMessageRepository ());
     /**Thread Safe*/
     //HttpClient instance is immutable, thus automatically thread-safe, and you can send multiple requests with it.
     private final HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(30)).build();

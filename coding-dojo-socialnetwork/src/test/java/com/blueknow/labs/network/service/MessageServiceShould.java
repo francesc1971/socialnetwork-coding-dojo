@@ -13,14 +13,13 @@ import org.junit.jupiter.api.Test;
 
 import com.blueknow.labs.network.model.Message;
 import com.blueknow.labs.network.model.Message.Channel;
-import com.blueknow.labs.network.port.in.PublishMessageUseCase;
 import com.blueknow.labs.network.port.out.MessageRepository;
 
-public class PublishMessageServiceShould {
+public class MessageServiceShould {
 	
 	final MessageRepository repository = new MockMessageRepository();
 	
-	final PublishMessageUseCase service = new PublishMessageService(this.repository);
+	final MessageService service = new MessageService(this.repository);
 
 	@Test
 	void persist_message_and_retrieve_from_repository() {

@@ -9,10 +9,15 @@
  */
 package com.blueknow.labs.network.springboot.adapter.in;
 
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.blueknow.labs.network.port.in.PublishMessageUseCase;
 
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -34,7 +39,7 @@ public class PublishMessageController {
         });
     }
 
-	@GetMapping(path ="/api/messages/{user}",  produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
+	@GetMapping(path ="/api/publish/{user}",  produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
 	public Flux<String> findMessages(@PathVariable("user") final String user) {
 		return Flux.defer(() -> Flux.fromIterable(this.publishMessageUseCase.findMessagesByUser(user))).log();
 

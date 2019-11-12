@@ -11,7 +11,10 @@ package com.blueknow.labs.network.service;
 
 import com.blueknow.labs.network.port.out.MessageRepository;
 import com.blueknow.labs.network.port.in.PublishMessageUseCase;
+import com.blueknow.labs.network.port.in.ReadMessageUseCase;
 import com.blueknow.labs.network.model.Message;
+import com.blueknow.labs.network.model.Message.Channel;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,13 +22,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class PublishMessageService implements PublishMessageUseCase {
+public class MessageService implements PublishMessageUseCase, ReadMessageUseCase {
 
-    private static final Logger log = LoggerFactory.getLogger (PublishMessageService.class);
+    private static final Logger log = LoggerFactory.getLogger (MessageService.class);
 
     private final MessageRepository repository;
 
-    public PublishMessageService(final MessageRepository repository) {
+    public MessageService(final MessageRepository repository) {
         this.repository = Objects.requireNonNull (repository);
     }
 
@@ -44,6 +47,14 @@ public class PublishMessageService implements PublishMessageUseCase {
         final var messages = this.repository.findMessagesByUser (user);
         log.info ("Found messages {}", messages);
         return messages.stream ().map (message -> message.getMessage ()).collect(Collectors.toList());
+    }
+    
+    @Override
+    public List<String> findMessagesByUserAndChannelTimeline(final String user) {
+    	Objects.requireNonNull (user, "User can NOT be null");
+    	final var messages = this.repository.findMessagesByUserAndChannel(user, Channel.TIMELINE);
+    	
+    	return messages.stream ().map (message -> message.getMessage ()).collect(Collectors.toList());
     }
 
 }
