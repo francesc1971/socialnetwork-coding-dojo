@@ -31,11 +31,13 @@ public class JpaMessage extends Message implements Serializable {
 	public JpaMessage() {
     }
 
-    /**copy constructor*/
-    public JpaMessage(final Message message) {
-        this.setMessage (message.getMessage ());
-        this.setUser (message.getUser ());
-    }
+	/** copy constructor */
+	public JpaMessage(final Message message) {
+		this.setMessage(message.getMessage());
+		this.setUser(message.getUser());
+		this.setChannel(message.getChannel());
+		this.setType(message.getType());
+	}
 
     @Override
     @Id
@@ -54,6 +56,18 @@ public class JpaMessage extends Message implements Serializable {
     @Column
     public String getUser() {
         return super.getUser ();
+    }
+    
+    @Override
+    @Column
+    public Type getType() {
+    	return super.getType();
+    }
+    
+    @Override
+    @Column
+    public Channel getChannel() {
+    	return super.getChannel();
     }
     
 }

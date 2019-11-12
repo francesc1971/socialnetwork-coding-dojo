@@ -9,18 +9,25 @@
  */
 package com.blueknow.labs.network.springboot.config;
 
-import com.blueknow.labs.network.port.in.PublishMessageUseCase;
-import com.blueknow.labs.network.port.out.MessageRepository;
-import com.blueknow.labs.network.service.PublishMessageService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.blueknow.labs.network.port.out.MessageRepository;
+import com.blueknow.labs.network.port.out.UserRepository;
+import com.blueknow.labs.network.service.MessageService;
+import com.blueknow.labs.network.service.UserService;
 
 @Configuration
 public class SocialNetworkConfiguration {
 
-    @Bean
-    PublishMessageUseCase publishMessageUseCase(final MessageRepository repository) {
-        return new PublishMessageService (repository);
-    }
+	@Bean
+	MessageService messageService(final MessageRepository repository) {
+		return new MessageService(repository);
+	}
+
+	@Bean
+	UserService userService(final UserRepository repository) {
+		return new UserService(repository);
+	}
 
 }
