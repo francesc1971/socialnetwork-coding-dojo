@@ -13,6 +13,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,7 +34,7 @@ public class JpaMessage extends Message implements Serializable {
     }
 
 	/** copy constructor */
-	public JpaMessage(final Message message) {
+	JpaMessage(final Message message) {
 		this.setMessage(message.getMessage());
 		this.setUser(message.getUser());
 		this.setChannel(message.getChannel());
@@ -60,14 +62,20 @@ public class JpaMessage extends Message implements Serializable {
     
     @Override
     @Column
+    @Enumerated(EnumType.STRING)
     public Type getType() {
     	return super.getType();
     }
     
     @Override
     @Column
+    @Enumerated(EnumType.STRING)
     public Channel getChannel() {
     	return super.getChannel();
+    }
+    
+    public static JpaMessage wrap(final Message message) {
+    	return message instanceof JpaMessage? JpaMessage.class.cast(message): new JpaMessage(message);
     }
     
 }

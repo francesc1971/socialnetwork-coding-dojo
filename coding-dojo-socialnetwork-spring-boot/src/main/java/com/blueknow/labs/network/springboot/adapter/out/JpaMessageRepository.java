@@ -17,13 +17,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public interface JpaMessageRepository extends MessageRepository, JpaRepository<JpaMessage, Long> {
 
     @Override
     default long persist(final Message message) {
-        final var persisted = this.save (new JpaMessage (message));
+        final var persisted = this.save (JpaMessage.wrap(Objects.requireNonNull(message)));
         return persisted.getId ();
     }
 

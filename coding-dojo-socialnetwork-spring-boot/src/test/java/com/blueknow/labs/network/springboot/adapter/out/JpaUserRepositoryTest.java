@@ -1,18 +1,19 @@
 package com.blueknow.labs.network.springboot.adapter.out;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import com.blueknow.labs.network.model.User;
+import com.blueknow.labs.network.port.out.UserRepository;
 
 @DataJpaTest
 public class JpaUserRepositoryTest {
 
 	@Autowired 
-	private JpaUserRepository repository;
+	private UserRepository repository;
 	
 	@Test
 	void should_save_simple_user() {
